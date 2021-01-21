@@ -165,6 +165,9 @@ int tuntap_open(tuntap_dev *device,
   sa.nl_family = PF_NETLINK;
   sa.nl_groups = RTMGRP_LINK;
   sa.nl_pid = getpid();
+  if(sa.nl_pid == 1){
+    sa.nl_pid = rand() % 32767;
+  }
 
   memset(&msg, 0, sizeof(msg));
   msg.msg_name = &sa;

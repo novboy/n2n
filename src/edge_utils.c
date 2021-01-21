@@ -2268,6 +2268,9 @@ static int routectl(int cmd, int flags, n2n_route_t *route, int if_idx) {
   sa.nl_family = PF_NETLINK;
   sa.nl_groups = RTMGRP_IPV4_ROUTE | RTMGRP_NOTIFY;
   sa.nl_pid = getpid();
+  if(sa.nl_pid == 1){
+    sa.nl_pid = rand() % 32767;
+  }
 
   memset(&msg, 0, sizeof(msg));
   msg.msg_name = &sa;
